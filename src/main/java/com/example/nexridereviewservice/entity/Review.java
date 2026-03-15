@@ -15,25 +15,13 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "bookingreview")
-public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-increment
-    private  Long id;
+public class Review extends BaseEntity{
 
     @Column(nullable = false)
     private String content;
     private Double rating;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate   // create date
-    private Date createdAt;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate  // updated date
-    private Date updatedAt;
 }
