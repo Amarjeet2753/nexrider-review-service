@@ -26,4 +26,10 @@ public class Booking extends BaseEntity {
     private Date endDate;
 
     private Long totalDistance;
+
+    @ManyToOne
+    private Driver driver;  // 1 : n
+
+     @ManyToOne
+    private Passanger passanger;  // 1 : n
 }
