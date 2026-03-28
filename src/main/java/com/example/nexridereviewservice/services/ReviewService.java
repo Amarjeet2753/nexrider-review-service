@@ -1,13 +1,18 @@
 package com.example.nexridereviewservice.services;
 
+import com.example.nexridereviewservice.entity.Booking;
 import com.example.nexridereviewservice.entity.Driver;
 import com.example.nexridereviewservice.repository.BookingRepository;
 import com.example.nexridereviewservice.repository.DriverRepository;
 import com.example.nexridereviewservice.repository.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +30,7 @@ public class ReviewService implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         System.out.println("test service");
 //
@@ -55,10 +61,21 @@ public class ReviewService implements CommandLineRunner {
 //        if(d.isPresent()){
 //            System.out.println(d.get().getName());
 //        }
-        Optional<Driver> d = driverRepository.hqlFindByIdAndLicenseNumber(1L,"D1232131");
-        if(d.isPresent()){
-            System.out.println(d.get().getName());
-        }
+//        Optional<Driver> d = driverRepository.hqlFindByIdAndLicenseNumber(1L,"D1232131");
+//        if(d.isPresent()){
+//            System.out.println(d.get().getName());
+//        }
 
+        List<Long> driverIds= new ArrayList<>(Arrays.asList(1L,2L));
+
+        List<Driver>  drivers= driverRepository.findAllByIdIn(driverIds);
+//        List<Booking> bookings= bookingRepository.findAllByDriverIn(drivers);
+
+        for(Driver driver : drivers){
+            List<Booking> b1 = driver.getBookings();
+            b1.forEach(booking -> System.out.println(booking.getId()));
+
+        }
     }
+
 }

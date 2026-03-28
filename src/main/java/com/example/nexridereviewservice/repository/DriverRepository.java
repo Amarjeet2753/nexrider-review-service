@@ -4,6 +4,7 @@ import com.example.nexridereviewservice.entity.Driver;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DriverRepository extends JpaRepository<Driver,Long> {
@@ -17,4 +18,6 @@ public interface DriverRepository extends JpaRepository<Driver,Long> {
     //hql
     @Query("SELECT d  FROM Driver d where d.id = :id  and d.licenseNumber=:license")
     Optional<Driver> hqlFindByIdAndLicenseNumber(Long id, String license);
+
+    List<Driver>  findAllByIdIn(List<Long> id);
 }
