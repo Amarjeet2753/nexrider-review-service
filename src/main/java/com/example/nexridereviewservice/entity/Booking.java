@@ -6,9 +6,9 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Getter
 @Setter
 @NoArgsConstructor
+@Getter
 @AllArgsConstructor
 @Builder
 public class Booking extends BaseEntity {
